@@ -1,0 +1,30 @@
+<div class="toolbar">
+  <nav>
+    <button class="nav-button" (click)="goToProfile()">Profile</button>
+    <button class="nav-button" (click)="logout()">Logout</button>
+  </nav>
+</div>
+
+<div class="movie-grid">
+  <mat-card *ngFor="let movie of movies" class="movie-card">
+    <mat-card-header>
+      <mat-card-title>{{ movie.Title }}</mat-card-title>
+      <mat-card-subtitle>Directed by: {{ movie.Director.Name }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}" />
+    <mat-card-actions>
+      <button class="card-button" mat-button color="primary" (click)="showGenre(movie)">Genre</button>
+      <button class="card-button" mat-button color="primary" (click)="showDirector(movie)">Director</button>
+      <button class="card-button" mat-button color="primary" (click)="showSynopsis(movie)">Synopsis</button>
+
+      <mat-icon 
+      class="favorite-icon" 
+      id="{{movie._id}}-favorite-icon" 
+      title="{{ movie.isFavorite ? 'Remove from favorites' : 'Add to favorites'}}" 
+      (click)="favoriteMovie(movie)"
+      >{{ movie.isFavorite ? 'favorite' : 'favorite_border' }}
+    </mat-icon>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

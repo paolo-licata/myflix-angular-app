@@ -1,0 +1,26 @@
+/* Centering the main content */
+.main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #000524;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Styling for the header */
+h1 {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+/* Container for buttons */
+.main-page div {
+  display: flex;
+  gap: 15px;
+}
+

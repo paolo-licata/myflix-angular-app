@@ -1,0 +1,31 @@
+mat-card-header.input-field {
+  margin-bottom: 20px;
+	align-items: center;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000524;
+  text-align: center;
+}
+
+/* Form field styling */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Input styling */
+input[matInput] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+/* Actions styling */
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

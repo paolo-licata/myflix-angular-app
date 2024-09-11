@@ -1,0 +1,81 @@
+mat-card {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  box-shadow: 0 4px 10px #0000001a;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+mat-card-title {
+  font-size: 24px;
+	margin-bottom: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: #000524;
+}
+
+mat-divider {
+  margin: 10px 0 20px 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+input[matInput] {
+  padding: 10px;
+  font-size: 16px;
+	border-radius: 20px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+button[mat-raised-button] {
+  width: 48%;
+  font-size: 14px;
+  padding: 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+button[mat-raised-button][color="primary"] {
+  background-color: #fff;
+  color: #2264a5;
+}
+
+button[mat-raised-button][color="warn"] {
+  background-color: #f44336;
+  color: #fff;
+}
+
+button[mat-raised-button]:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+  mat-card {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  button[mat-raised-button] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  mat-card-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

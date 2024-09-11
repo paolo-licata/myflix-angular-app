@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title>Your Profile</mat-card-title>
+
+  <form>
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput [(ngModel)]="userData.Username" name="username" required>
+    </mat-form-field>
+
+		<mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput [(ngModel)]="userData.Password" name="password" type="password" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="userData.Email" name="email" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Birthday</mat-label>
+      <input matInput [(ngModel)]="userData.Birthday" name="birthday" type="date">
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="updateUser(); $event.preventDefault()">Save</button>
+      <button mat-raised-button color="warn" (click)="deleteUser()">Delete Account</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

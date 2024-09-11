@@ -1,0 +1,44 @@
+mat-card.mat-card {
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+/* Header styling */
+mat-card-header.input-field {
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000524;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+input[matInput] {
+  padding: 8px;
+  font-size: 16px;
+}
+
+/* Button styling */
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+button[mat-raised-button] {
+  font-size: 16px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button[mat-raised-button][color="primary"]:hover {
+  opacity: 0.9;
+}
