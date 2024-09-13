@@ -63,6 +63,19 @@ button[mat-raised-button]:hover {
   opacity: 0.9;
 }
 
+.back-link-container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 12px;
+}
+
+.back-link {
+  color: #1976d2; 
+  text-decoration: underline; 
+  cursor: pointer; 
+  font-size: 14px; 
+}
+
 @media (max-width: 600px) {
   mat-card {
     margin: 20px;

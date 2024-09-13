@@ -16,11 +16,22 @@ export class FetchApiDataService {
   private getAuthHeaders(): { headers: HttpHeaders, username: string } {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
+
+    if (!token) {
+      throw new Error('Token not found, please log in again.');
+    }
+
     if (!user) {
       throw new Error('User not logged in')
     }
+
     const parsedUser = JSON.parse(user);
-    const username = parsedUser.username;
+    const username = parsedUser.Username;
+
+    if (!username) {
+      throw new Error('Username is missing in local storage.');
+    }
+    
     return {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,

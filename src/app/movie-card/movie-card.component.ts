@@ -78,21 +78,17 @@ getMovies(): void {
 
   //Adds a movie to Favorites
   favoriteMovie(movie: any) {
-    let user = JSON.parse(localStorage.getItem('user') || '');
-    const icon = document.getElementById(`${movie._id}-favorite-icon`);
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+
     // Check if the movie is already favorited
-    if (!user.favoriteMovies.includes(movie._id)) {
+    if (!user.FavoriteMovies.includes(movie._id)) {
       this.fetchApiData.addFavoriteMovie(movie._id).subscribe((resp: any) => {
-      
-      if (icon) {
-        icon.setAttribute("fontIcon", "favorite");
-      }
+        
+        movie.isFavorite = true;
+        user.FavoriteMovies = resp.FavoriteMovies; //Updates FavoriteMovies list for the user
+        localStorage.setItem('user', JSON.stringify(user));
 
-      movie.isFavorite = true;
-      user.favoriteMovies = resp.favoriteMovies;
-      localStorage.setItem("user", JSON.stringify(user));
-
-      this.snackBar.open(
+        this.snackBar.open(
         `${movie.Title} has been added to your favorites!`,
         'OK',
         {
@@ -107,16 +103,12 @@ getMovies(): void {
 
 // Unfavorite a movie
 removeFavoriteMovie(movie: any) {
-  let user = JSON.parse(localStorage.getItem('user') || '');
-  const icon = document.getElementById(`${movie._id}-favorite-icon`);
+  let user = JSON.parse(localStorage.getItem('user') || '{}');
 
   this.fetchApiData.deleteFavoriteMovie(movie._id).subscribe((resp: any) => {      
-    movie.isFavorite = false;
 
-    if (icon) {
-      icon.setAttribute("fonticon", "favorite_border")
-    }
-    user.favoriteMovies = resp.favoriteMovies;
+    movie.isFavorite = false;
+    user.FavoriteMovies = resp.FavoriteMovies;
     localStorage.setItem("user", JSON.stringify(user));
 
     this.snackBar.open(

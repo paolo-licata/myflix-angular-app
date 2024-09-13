@@ -1,4 +1,5 @@
 <mat-card>
+
   <mat-card-title>Your Profile</mat-card-title>
 
   <form>
@@ -27,4 +28,8 @@
       <button mat-raised-button color="warn" (click)="deleteUser()">Delete Account</button>
     </mat-card-actions>
   </form>
+
+  <mat-card-actions class="back-link-container">
+    <a class="back-link" (click)="goBack()">Back to Movies</a>
+  </mat-card-actions>
 </mat-card>

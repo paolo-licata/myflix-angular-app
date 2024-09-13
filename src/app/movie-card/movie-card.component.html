@@ -18,12 +18,14 @@
       <button class="card-button" mat-button color="primary" (click)="showSynopsis(movie)">Synopsis</button>
 
       <mat-icon 
-      class="favorite-icon" 
+      class="favorite-icon"
+      [ngClass]="{ 'favorite': movie.isFavorite, 'not-favorite': !movie.isFavorite }"
       id="{{movie._id}}-favorite-icon" 
       title="{{ movie.isFavorite ? 'Remove from favorites' : 'Add to favorites'}}" 
       (click)="favoriteMovie(movie)"
       >{{ movie.isFavorite ? 'favorite' : 'favorite_border' }}
     </mat-icon>
+
     </mat-card-actions>
   </mat-card>
 </div>

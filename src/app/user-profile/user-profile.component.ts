@@ -26,16 +26,21 @@ export class UserProfileComponent implements OnInit {
     this.getUserDetails();
   }
 
+  // Navigate back to /movies page
+  goBack(): void {
+    this.router.navigate(['/movies']);
+  }
+
   // Fetch user data and populate the form
   getUserDetails(): void {
     this.fetchApiData.getUser().subscribe((res: any) => {
+      console.log(res);
       this.userData = {
         ...res,
         password: this.userData.password,
         token: this.userData.token
       };
       localStorage.setItem("user", JSON.stringify(this.userData));
-      this.getFavoriteMovies();
     }, (err: any) => {
       this.snackBar.open('Error fetching user details', 'OK', {
         duration: 2000
@@ -56,7 +61,6 @@ export class UserProfileComponent implements OnInit {
       this.snackBar.open('Profile updated successfully', 'OK', {
         duration: 2000
       });
-      this.getFavoriteMovies();
     }, (err: any) => {
       this.snackBar.open('Error updating profile', 'OK', {
         duration: 2000
@@ -81,33 +85,5 @@ export class UserProfileComponent implements OnInit {
         console.error(err);
       });
     }
-  }
-
-  // Fetch favorite movies
-  getFavoriteMovies(): void {
-    this.fetchApiData.getFavoriteMovies().subscribe((res: any) => {
-      this.favoriteMovies = res; // The API directly returns favorite movies
-    }, (err: any) => {
-      this.snackBar.open('Error fetching favorite movies', 'OK', {
-        duration: 2000
-      });
-      console.error(err);
-    });
-  }
-
-  removeFromFavorite(movie: any): void {
-    this.fetchApiData.deleteFavoriteMovie(movie._id).subscribe((res: any) => {
-      this.userData.favoriteMovies = res.favoriteMovies; // Update the user’s favorites
-      localStorage.setItem("user", JSON.stringify(this.userData)); // Save updated user data
-      this.getFavoriteMovies();
-      this.snackBar.open('Movie removed from favorites', 'OK', {
-        duration: 2000
-      });
-    }, (err: any) => {
-      this.snackBar.open('Error removing movie from favorites', 'OK', {
-        duration: 2000
-      });
-      console.error(err);
-    });
   }
 }
