@@ -21,7 +21,7 @@
       class="favorite-icon"
       [ngClass]="{ 'favorite': movie.isFavorite, 'not-favorite': !movie.isFavorite }"
       id="{{movie._id}}-favorite-icon" 
-      title="{{ movie.isFavorite ? 'Remove from favorites' : 'Add to favorites'}}" 
+      title="{{ movie.isFavorite ? 'Add to favorites' : 'Remove from favorites'}}" 
       (click)="favoriteMovie(movie)"
       >{{ movie.isFavorite ? 'favorite' : 'favorite_border' }}
     </mat-icon>
