@@ -34,10 +34,8 @@ export class UserProfileComponent implements OnInit {
   // Fetch user data and populate the form
   getUserDetails(): void {
     this.fetchApiData.getUser().subscribe((res: any) => {
-      console.log(res);
       this.userData = {
         ...res,
-        password: this.userData.password,
         token: this.userData.token
       };
       localStorage.setItem("user", JSON.stringify(this.userData));
