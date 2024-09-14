@@ -1,6 +1,19 @@
 # MyflixAngularApp
 
+Welcome to MyFlixAngular, a portfolio project showcasing my skills in building Angular application. This project serves as a client for the Movie API, displaying movie data with a user-friendly interface using Angular Material.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
+
+## Technologies Used
+
+- Angular: A powerful web application framework.
+- RxJS: A library for reactive programming using Observables.
+- Angular Material: A UI component library for Angular applications.
+
+## Get started
+
+- Clone the repository: git clone https://github.com/paolo-licata/myflix-angular-app.git
+- Dependencies install: npm install or npm i
 
 ## Development server
 
@@ -21,7 +34,3 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
