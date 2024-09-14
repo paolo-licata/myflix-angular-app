@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+/**
+ * UserProfileComponent allows users to view and update their profile information, as well as delete their account.
+ */
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -26,12 +29,17 @@ export class UserProfileComponent implements OnInit {
     this.getUserDetails();
   }
 
-  // Navigate back to /movies page
+  /**
+   * Navigates back to the movies page.
+   */
   goBack(): void {
     this.router.navigate(['/movies']);
   }
 
-  // Fetch user data and populate the form
+  /**
+   * Fetches the user's profile details from the API and updates the `userData` object.
+   * The response data is stored in local storage to keep it in sync.
+   */
   getUserDetails(): void {
     this.fetchApiData.getUser().subscribe((res: any) => {
       this.userData = {
@@ -47,7 +55,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  // Update user details
+  /**
+   * Updates the user's profile details by sending updated data to the API.
+   * Displays a notification whether the update was successful or not.
+   */
   updateUser(): void {
     this.fetchApiData.editUser(this.userData).subscribe((res: any) => {
       this.userData = {
@@ -67,7 +78,10 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  // Delete user account
+  /**
+   * Deletes the user's account after a confirmation prompt.
+   * On success, clears local storage and navigates to the welcome page.
+   */
   deleteUser(): void {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       this.fetchApiData.deleteUser().subscribe((res) => {

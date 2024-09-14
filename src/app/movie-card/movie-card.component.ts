@@ -7,7 +7,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Router } from '@angular/router';
 
-
+/**
+ * The MovieCardComponent displays a list of movies and allows users to view detailed information 
+ * about genres, directors, and synopses, as well as add or remove movies from their favorites list.
+ */
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -22,27 +25,40 @@ export class MovieCardComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-ngOnInit(): void {
-  this.getMovies();
-}
-
-goToProfile(): void {
-  this.router.navigate(["profile"]);
-}
-
-logout(): void {
-  this.router.navigate(["welcome"]);
-  localStorage.removeItem("user");
-}
-
-getMovies(): void {
-  this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      return this.movies;
-    });
+  ngOnInit(): void {
+    this.getMovies();
   }
 
-  //Open a dialog with genre information
+  /**
+  * Navigates to the user's profile page.
+  */
+  goToProfile(): void {
+    this.router.navigate(["profile"]);
+  }
+
+  /**
+  * Logs out the user by navigating to the welcome page and removing user data from local storage.
+  */
+  logout(): void {
+    this.router.navigate(["welcome"]);
+    localStorage.removeItem("user");
+  }
+
+  /**
+  * Fetches the list of movies from the API and assigns them to the `movies` array.
+  */
+  getMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+        this.movies = resp;
+        return this.movies;
+      });
+    }
+
+  /**
+  * Opens a dialog showing the director's information for a specific movie.
+  * 
+  * @param movie - The movie whose director information is to be displayed.
+  */  
   showGenre(movie: any): void {
     this.dialog.open(DialogBoxComponent, {
       data: {
@@ -53,7 +69,11 @@ getMovies(): void {
     });
   };
 
-  //opens dialog with director info
+  /**
+   * Opens a dialog showing the director's information for a specific movie.
+   * 
+   * @param movie - The movie whose director information is to be displayed.
+   */
   showDirector(movie: any): void {
     this.dialog.open(DialogBoxComponent, {
       data: {
@@ -64,7 +84,11 @@ getMovies(): void {
     });
   };
 
-  //opens dialog with plot info
+  /**
+  * Opens a dialog showing the synopsis for a specific movie.
+  * 
+  * @param movie - The movie whose synopsis is to be displayed.
+  */
   showSynopsis(movie: any): void {
     this.dialog.open(DialogBoxComponent, {
       data: {
@@ -75,7 +99,12 @@ getMovies(): void {
     });
   };
 
-  //Adds a movie to Favorites
+  /**
+   * Adds a movie to the user's list of favorite movies.
+   * If the movie is already a favorite, it removes it instead.
+   * 
+   * @param movie - The movie to be added or removed from favorites.
+   */
   favoriteMovie(movie: any) {
     let user = JSON.parse(localStorage.getItem('user') || '{}');
 
@@ -95,28 +124,32 @@ getMovies(): void {
         }
       );
     });
-  } else {
-    this.removeFavoriteMovie(movie);
+    } else {
+      this.removeFavoriteMovie(movie);
+    }
   }
-}
 
-// Unfavorite a movie
-removeFavoriteMovie(movie: any) {
-  let user = JSON.parse(localStorage.getItem('user') || '{}');
+  /**
+     * Removes a movie from the user's list of favorite movies.
+     * 
+     * @param movie - The movie to be removed from favorites.
+     */
+  removeFavoriteMovie(movie: any) {
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
 
-  this.fetchApiData.deleteFavoriteMovie(movie._id).subscribe((resp: any) => {      
+    this.fetchApiData.deleteFavoriteMovie(movie._id).subscribe((resp: any) => {      
 
-    movie.isFavorite = false;
-    user.FavoriteMovies = resp.FavoriteMovies;
-    localStorage.setItem("user", JSON.stringify(user));
+      movie.isFavorite = false;
+      user.FavoriteMovies = resp.FavoriteMovies;
+      localStorage.setItem("user", JSON.stringify(user));
 
-    this.snackBar.open(
-      `${movie.Title} has been removed from your favorites!`,
-      'OK',
-      {
-        duration: 2000,
-      }
-    );
-  });
-};
+      this.snackBar.open(
+        `${movie.Title} has been removed from your favorites!`,
+        'OK',
+        {
+          duration: 2000,
+        }
+      );
+    });
+  };
 }

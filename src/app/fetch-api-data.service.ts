@@ -12,7 +12,13 @@ export class FetchApiDataService {
 
   constructor(private http: HttpClient) {}
 
-  // Helper to get the token and username
+  /**
+   * Returns HTTP headers with the authorization token and username.
+   * Throws an error if token or user is missing in local storage.
+   *
+   * @throws Will throw an error if the token or user is not found in local storage.
+   * @returns Object containing HTTP headers and the username.
+   */
   private getAuthHeaders(): { headers: HttpHeaders, username: string } {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
@@ -40,14 +46,24 @@ export class FetchApiDataService {
     };
   }
 
-  // User registration
+  /**
+   * Registers a new user.
+   * 
+   * @param userDetails - An object containing user registration information.
+   * @returns Observable containing the HTTP response.
+   */
   public userRegistration(userDetails: any): Observable<any> {
     return this.http.post(apiUrl + 'users', userDetails).pipe(
       catchError(this.handleError)
     );
   }
 
-  // User login
+  /**
+   * Logs in a user.
+   * 
+   * @param userDetails - An object containing the user's login details (username and password).
+   * @returns Observable containing the HTTP response with user data.
+   */
   public userLogin(userDetails: any): Observable<any> {
     return this.http.post(apiUrl + 'login', userDetails).pipe(
       map(this.extractResponseData),
@@ -55,7 +71,11 @@ export class FetchApiDataService {
     );
   }
 
-  // Get all movies
+  /**
+   * Fetches all movies from the API.
+   * 
+   * @returns Observable containing the list of all movies.
+   */
   getAllMovies(): Observable<any> {
     const { headers } = this.getAuthHeaders();
     return this.http.get(apiUrl + 'movies', { headers }).pipe(
@@ -64,7 +84,12 @@ export class FetchApiDataService {
     );
   }
 
-  // Get movie by title
+  /**
+   * Fetches a specific movie by its title.
+   * 
+   * @param title - The title of the movie.
+   * @returns Observable containing the movie details.
+   */
   getMovie(title: string): Observable<any> {
     const { headers } = this.getAuthHeaders();
     return this.http.get(apiUrl + `movies/${title}`, { headers }).pipe(
@@ -73,7 +98,12 @@ export class FetchApiDataService {
     );
   }
 
-  // Get director by name
+  /**
+   * Fetches director information by name.
+   * 
+   * @param name - The director's name.
+   * @returns Observable containing the director's details.
+   */
   getDirector(name: string): Observable<any> {
     const { headers } = this.getAuthHeaders();
     return this.http.get(apiUrl + `movies/directors/${name}`, { headers }).pipe(
@@ -82,7 +112,12 @@ export class FetchApiDataService {
     );
   }
 
-  // Get genre
+  /**
+   * Fetches a genre by its name.
+   * 
+   * @param name - The genre name.
+   * @returns Observable containing genre details.
+   */
   getGenre(name: string): Observable<any> {
     const { headers } = this.getAuthHeaders();
     return this.http.get(apiUrl + `movies/genre/${name}`, { headers }).pipe(
@@ -91,7 +126,11 @@ export class FetchApiDataService {
     );
   }
 
-  // Get all users
+  /**
+   * Fetches all registered users.
+   * 
+   * @returns Observable containing the list of all users.
+   */
   getAllUsers(): Observable<any> {
     const { headers } = this.getAuthHeaders();
     return this.http.get(apiUrl + 'users', { headers }).pipe(
@@ -100,7 +139,11 @@ export class FetchApiDataService {
     );
   }
 
-  // Get favorite movies by user
+  /**
+   * Fetches a user's favorite movies.
+   * 
+   * @returns Observable containing the list of favorite movies for the logged-in user.
+   */
   getFavoriteMovies(): Observable<any> {
     const { headers, username } = this.getAuthHeaders();
     return this.http.get(apiUrl + `users/${username}/movies`, { headers }).pipe(
@@ -109,7 +152,12 @@ export class FetchApiDataService {
     );
   }
 
-  // Add or POST a favorite movie
+  /**
+   * Adds a movie to the user's list of favorite movies.
+   * 
+   * @param movieId - The ID of the movie to be added.
+   * @returns Observable containing the updated list of favorite movies.
+   */
   addFavoriteMovie(movieId: string): Observable<any> {
     const { headers, username } = this.getAuthHeaders();
     return this.http.post(apiUrl + `users/${username}/movies/${movieId}`, {}, { headers }).pipe(
@@ -118,7 +166,12 @@ export class FetchApiDataService {
     );
   }
 
-  // Delete a movie from favorites
+  /**
+   * Removes a movie from the user's list of favorite movies.
+   * 
+   * @param movieId - The ID of the movie to be removed.
+   * @returns Observable containing the updated list of favorite movies.
+   */
   deleteFavoriteMovie(movieId: string): Observable<any> {
     const { headers, username } = this.getAuthHeaders();
     return this.http.delete(apiUrl + `users/${username}/movies/${movieId}`, { headers }).pipe(
@@ -127,7 +180,11 @@ export class FetchApiDataService {
     );
   }
 
-  // Get user data from local storage
+  /**
+   * Fetches the logged-in user's data.
+   * 
+   * @returns Observable containing the user's details.
+   */
   getUser(): Observable<any> {
     const { headers, username } = this.getAuthHeaders();
     return this.http.get(apiUrl + `users/${username}`, { headers }).pipe(
@@ -136,7 +193,12 @@ export class FetchApiDataService {
     );
   }
 
-  // Edit user
+  /**
+   * Edits the logged-in user's information.
+   * 
+   * @param userData - An object containing the updated user data.
+   * @returns Observable containing the updated user details.
+   */
   editUser(userData: any): Observable<any> {
     const { headers, username } = this.getAuthHeaders();
     return this.http.put(apiUrl + `users/${username}`, userData, { headers }).pipe(
@@ -145,7 +207,11 @@ export class FetchApiDataService {
     );
   }
 
-  // Delete user
+  /**
+   * Deletes the logged-in user's account.
+   * 
+   * @returns Observable confirming the account deletion.
+   */
   deleteUser(): Observable<any> {
     const { headers, username } = this.getAuthHeaders();
     return this.http.delete(apiUrl + `users/${username}`, { headers }).pipe(
